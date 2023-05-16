@@ -66,11 +66,11 @@ class _HomePageState extends State<HomePage> {
 
     _refreshItems(); // update the UI
 
-    // Dsiplaying snack bar after deleting the item
+    // Displaying snack bar after deleting the item
     // ignore: use_build_context_synchronously
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('An item has been deleted'),
+        content: Text('An item has been deleted.'),
       ),
     );
   }
@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
   Future<void> _showMyDialog(BuildContext context, int? itemKey) async {
     // Checking whether key is null or not
     // if itemKey is not null that means key already exists
-    // therefore we need to display already existing content
+    // therefore we need to display already existing content, and then dialog box
     if (itemKey != null) {
       final existingItem =
           _items.firstWhere((element) => element['key'] == itemKey);
@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
       _descriptionController.text = existingItem['description'];
     }
 
-    // else if key is null that means new item will be added
+    // if key is null that means new item will be added
     return showDialog(
       context: context,
       builder: (context) {
@@ -111,6 +111,8 @@ class _HomePageState extends State<HomePage> {
                 // Description textfield
                 TextFormField(
                   controller: _descriptionController,
+                  minLines: 1,
+                  maxLines: 10,
                   decoration: const InputDecoration(
                     hintText: 'Enter description',
                     border: OutlineInputBorder(),
@@ -190,7 +192,7 @@ class _HomePageState extends State<HomePage> {
                 final currentItemObject = _items[index];
 
                 return Card(
-                  color: Colors.grey.shade50,
+                  color: Colors.white,
                   margin: const EdgeInsets.all(8.0),
                   elevation: 3.0,
                   child: ListTile(
@@ -235,7 +237,7 @@ class _HomePageState extends State<HomePage> {
               },
             )
           : const Center(
-              child: Text('Click butto to add a note.'),
+              child: Text('Click this button to add notes.'),
             ),
 
       floatingActionButton: FloatingActionButton(
